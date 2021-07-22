@@ -1851,8 +1851,8 @@ stock void MapFinishedMsgs(int client, int rankThisRun = 0)
 {
 	if (IsValidClient(client))
 	{
-		float RecordDiff, RecordDiff2;
-		char szRecordDiff[32], szRecordDiff2[32], szName[MAX_NAME_LENGTH];
+		float RecordDiff2;
+		char szRecordDiff2[32], szName[MAX_NAME_LENGTH];
 		GetClientName(client, szName, 128);
 		int count = g_MapTimesCount;
 
@@ -1875,17 +1875,16 @@ stock void MapFinishedMsgs(int client, int rankThisRun = 0)
 			Format(szGroup, 128, "");
 
 		// Map SR, time difference formatting 
-		RecordDiff = g_fRecordMapTime - g_fFinalTime[client];
-		FormatTimeFloat(client, RecordDiff, 3, szRecordDiff, 32);
-		if (RecordDiff > 0.0)
-		{
-			Format(szRecordDiff, 32, "-%s", szRecordDiff);
-		}
-		else
-		{
-			Format(szRecordDiff, 32, "+%s", szRecordDiff);
-		}
-		PrintToChat(client, "RecDiff: %f", RecordDiff);
+		// RecordDiff = g_fRecordMapTime - g_fFinalTime[client];
+		// FormatTimeFloat(client, RecordDiff, 3, szRecordDiff, 32);
+		// if (RecordDiff > 0.0)
+		// {
+		// 	Format(szRecordDiff, 32, "-%s", szRecordDiff);
+		// }
+		// else
+		// {
+		// 	Format(szRecordDiff, 32, "+%s", szRecordDiff);
+		// }
 
 		// Player beat map SR, time difference formatting 
 		RecordDiff2 = g_fOldRecordMapTime - g_fFinalTime[client];
@@ -1898,7 +1897,6 @@ stock void MapFinishedMsgs(int client, int rankThisRun = 0)
 		{
 			Format(szRecordDiff2, 32, "+%s", szRecordDiff2);
 		}
-		PrintToChat(client, "RecDiff2: %f", RecordDiff2);
 
 		// Check that ck_chat_record_type matches and ck_min_rank_announce matches
 		if ((GetConVarInt(g_hAnnounceRecord) == 0 ||
@@ -1934,13 +1932,13 @@ stock void MapFinishedMsgs(int client, int rankThisRun = 0)
 					{
 						if (szGroup[client] == 0) // No group available
 						{	
-							CPrintToChat(i,"%t", "MapFinished3", g_szChatPrefix, szName, g_szFinalTime[client], szRecordDiff, g_MapRank[client], count);
-							PrintToConsole(client, "Surftimer | %s set a PB of %s [SR %s | Rank #%i/%i]", szName, g_szFinalTime[client], szRecordDiff, g_MapRank[client], count);
+							CPrintToChat(i,"%t", "MapFinished3", g_szChatPrefix, szName, g_szFinalTime[client], szRecordDiff2, g_MapRank[client], count);
+							PrintToConsole(client, "Surftimer | %s set a PB of %s [SR %s | Rank #%i/%i]", szName, g_szFinalTime[client], szRecordDiff2, g_MapRank[client], count);
 						}
 						if (szGroup[client] > 0) // Group available
 						{
-							CPrintToChat(i,"%t", "MapFinished4", g_szChatPrefix, szName, g_szFinalTime[client], szRecordDiff, g_MapRank[client], count, szGroup);
-							PrintToConsole(client, "Surftimer | %s set a PB of %s [SR %s | Rank #%i/%i | %s]", szName, g_szFinalTime[client], szRecordDiff, g_MapRank[client], count, szGroup);
+							CPrintToChat(i,"%t", "MapFinished4", g_szChatPrefix, szName, g_szFinalTime[client], szRecordDiff2, g_MapRank[client], count, szGroup);
+							PrintToConsole(client, "Surftimer | %s set a PB of %s [SR %s | Rank #%i/%i | %s]", szName, g_szFinalTime[client], szRecordDiff2, g_MapRank[client], count, szGroup);
 						}
 					}
 					else if (g_bMapPBRecord[client] && !g_bMapSRVRecord[client]) // Player beat Personal Record
@@ -1949,19 +1947,19 @@ stock void MapFinishedMsgs(int client, int rankThisRun = 0)
 
 						if (szGroup[client] == 0) // No group available
 						{
-							CPrintToChat(i, "%t", "MapFinished5",g_szChatPrefix, szName, g_szFinalTime[client], szRecordDiff, g_szTimeDifference[client], g_MapRank[client], count);
-							PrintToConsole(client, "Surftimer | %s finished in %s [SR %s | PB %s | Rank #%i/%i]", szName, g_szFinalTime[client], szRecordDiff, g_szTimeDifference[client], g_MapRank[client], count);
+							CPrintToChat(i, "%t", "MapFinished5",g_szChatPrefix, szName, g_szFinalTime[client], szRecordDiff2, g_szTimeDifference[client], g_MapRank[client], count);
+							PrintToConsole(client, "Surftimer | %s finished in %s [SR %s | PB %s | Rank #%i/%i]", szName, g_szFinalTime[client], szRecordDiff2, g_szTimeDifference[client], g_MapRank[client], count);
 						}
 						if (szGroup[client] > 0) // Group available
 						{
-							CPrintToChat(i, "%t", "MapFinished6",g_szChatPrefix, szName, g_szFinalTime[client], szRecordDiff, g_szTimeDifference[client], g_MapRank[client], count, szGroup);
-							PrintToConsole(client, "Surftimer | %s finished in %s [SR %s | PB %s | Rank #%i/%i | %s]", szName, g_szFinalTime[client], szRecordDiff, g_szTimeDifference[client], g_MapRank[client], count, szGroup);
+							CPrintToChat(i, "%t", "MapFinished6",g_szChatPrefix, szName, g_szFinalTime[client], szRecordDiff2, g_szTimeDifference[client], g_MapRank[client], count, szGroup);
+							PrintToConsole(client, "Surftimer | %s finished in %s [SR %s | PB %s | Rank #%i/%i | %s]", szName, g_szFinalTime[client], szRecordDiff2, g_szTimeDifference[client], g_MapRank[client], count, szGroup);
 						}
 					}
 					else if (!g_bMapSRVRecord[client] && !g_bMapFirstRecord[client] && !g_bMapPBRecord[client]) // Player did not beat Server Record nor finish for 1st time nor beat Personal Record
 					{
-						CPrintToChat(i, "%t", "MapFinished7", g_szChatPrefix, szName, g_szFinalTime[client], szRecordDiff, g_szTimeDifference[client], g_MapRank[client], count);
-						PrintToConsole(client, "Surftimer | %s finished in %s [SR %s | PB %s | Rank #%i/%i]", szName, g_szFinalTime[client], szRecordDiff, g_szTimeDifference[client], g_MapRank[client], count);
+						CPrintToChat(i, "%t", "MapFinished7", g_szChatPrefix, szName, g_szFinalTime[client], szRecordDiff2, g_szTimeDifference[client], g_MapRank[client], count);
+						PrintToConsole(client, "Surftimer | %s finished in %s [SR %s | PB %s | Rank #%i/%i]", szName, g_szFinalTime[client], szRecordDiff2, g_szTimeDifference[client], g_MapRank[client], count);
 					}
 				}
 			}
@@ -1984,13 +1982,13 @@ stock void MapFinishedMsgs(int client, int rankThisRun = 0)
 				{
 					if (szGroup[client] == 0) // No group available
 					{	
-						CPrintToChat(client,"%t", "MapFinished3", g_szChatPrefix, szName, g_szFinalTime[client], szRecordDiff, g_MapRank[client], count);
-						PrintToConsole(client, "Surftimer | %s set a PB of %s [SR %s | Rank #%i/%i]", szName, g_szFinalTime[client], szRecordDiff, g_MapRank[client], count);
+						CPrintToChat(client,"%t", "MapFinished3", g_szChatPrefix, szName, g_szFinalTime[client], szRecordDiff2, g_MapRank[client], count);
+						PrintToConsole(client, "Surftimer | %s set a PB of %s [SR %s | Rank #%i/%i]", szName, g_szFinalTime[client], szRecordDiff2, g_MapRank[client], count);
 					}
 					if (szGroup[client] > 0) // Group available
 					{
-						CPrintToChat(client,"%t", "MapFinished4", g_szChatPrefix, szName, g_szFinalTime[client], szRecordDiff, g_MapRank[client], count, szGroup);
-						PrintToConsole(client, "Surftimer | %s set a PB of %s [SR %s | Rank #%i/%i | %s]", szName, g_szFinalTime[client], szRecordDiff, g_MapRank[client], count, szGroup);
+						CPrintToChat(client,"%t", "MapFinished4", g_szChatPrefix, szName, g_szFinalTime[client], szRecordDiff2, g_MapRank[client], count, szGroup);
+						PrintToConsole(client, "Surftimer | %s set a PB of %s [SR %s | Rank #%i/%i | %s]", szName, g_szFinalTime[client], szRecordDiff2, g_MapRank[client], count, szGroup);
 					}
 				}
 				else if (g_bMapPBRecord[client] && !g_bMapSRVRecord[client]) // Player beat Personal Record
@@ -1999,19 +1997,19 @@ stock void MapFinishedMsgs(int client, int rankThisRun = 0)
 
 					if (szGroup[client] == 0) // No group available
 					{
-						CPrintToChat(client, "%t", "MapFinished5",g_szChatPrefix, szName, g_szFinalTime[client], szRecordDiff, g_szTimeDifference[client], g_MapRank[client], count);
-						PrintToConsole(client, "Surftimer | %s finished in %s [SR %s | PB %s | Rank #%i/%i]", szName, g_szFinalTime[client], szRecordDiff, g_szTimeDifference[client], g_MapRank[client], count);
+						CPrintToChat(client, "%t", "MapFinished5",g_szChatPrefix, szName, g_szFinalTime[client], szRecordDiff2, g_szTimeDifference[client], g_MapRank[client], count);
+						PrintToConsole(client, "Surftimer | %s finished in %s [SR %s | PB %s | Rank #%i/%i]", szName, g_szFinalTime[client], szRecordDiff2, g_szTimeDifference[client], g_MapRank[client], count);
 					}
 					if (szGroup[client] > 0) // Group available
 					{
-						CPrintToChat(client, "%t", "MapFinished6",g_szChatPrefix, szName, g_szFinalTime[client], szRecordDiff, g_szTimeDifference[client], g_MapRank[client], count, szGroup);
-						PrintToConsole(client, "Surftimer | %s finished in %s [SR %s | PB %s | Rank #%i/%i | %s]", szName, g_szFinalTime[client], szRecordDiff, g_szTimeDifference[client], g_MapRank[client], count, szGroup);
+						CPrintToChat(client, "%t", "MapFinished6",g_szChatPrefix, szName, g_szFinalTime[client], szRecordDiff2, g_szTimeDifference[client], g_MapRank[client], count, szGroup);
+						PrintToConsole(client, "Surftimer | %s finished in %s [SR %s | PB %s | Rank #%i/%i | %s]", szName, g_szFinalTime[client], szRecordDiff2, g_szTimeDifference[client], g_MapRank[client], count, szGroup);
 					}
 				}
 				else if (!g_bMapSRVRecord[client] && !g_bMapFirstRecord[client] && !g_bMapPBRecord[client]) // Player did not beat Server Record nor finish for 1st time nor beat Personal Record
 				{
-					CPrintToChat(client, "%t", "MapFinished7", g_szChatPrefix, szName, g_szFinalTime[client], szRecordDiff, g_szTimeDifference[client], g_MapRank[client], count);
-					PrintToConsole(client, "Surftimer | %s finished in %s [SR %s | PB %s | Rank #%i/%i]", szName, g_szFinalTime[client], szRecordDiff, g_szTimeDifference[client], g_MapRank[client], count);
+					CPrintToChat(client, "%t", "MapFinished7", g_szChatPrefix, szName, g_szFinalTime[client], szRecordDiff2, g_szTimeDifference[client], g_MapRank[client], count);
+					PrintToConsole(client, "Surftimer | %s finished in %s [SR %s | PB %s | Rank #%i/%i]", szName, g_szFinalTime[client], szRecordDiff2, g_szTimeDifference[client], g_MapRank[client], count);
 				}
 			}
 		}

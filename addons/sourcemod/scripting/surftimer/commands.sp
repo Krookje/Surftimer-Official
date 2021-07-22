@@ -1403,15 +1403,14 @@ public Action Command_ToStage(int client, int args)
 		g_bUsingStageTeleport[client] = true;
 		GetCmdArg(1, arg1, sizeof(arg1));
 		int StageId = StringToInt(arg1);
-		if (StageId == 3)
+		if ((StageId <= g_mapZonesTypeCount[0][3] + 1) && (StageId > 0) )
 		{
 			g_bWrcpTimeractivated[client] = false;
-			teleportClient(client, 0, 3, true);
-			g_Stage[0][client] = 3;
-			g_CurrentStage[client] = 3;
+			g_Stage[0][client] = StageId;
+			g_CurrentStage[client] = StageId;
+			teleportClient(client, 0, StageId, true);
 			return Plugin_Handled;
 		}
-		teleportClient(client, 0, StageId, true);
 	}
 
 	return Plugin_Handled;

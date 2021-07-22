@@ -247,9 +247,11 @@ public Action StartTouchTrigger(int caller, int activator)
 			g_iClientInZone[activator][3] = id;
 			StartTouch(activator, action);
 		}
-		else
-			if (action[0] == 6 || action[0] == 7 || action[0] == 8 || action[0] == 0 || action[0] == 9 || action[0] == 10 || action[0] == 11) // Allow MISC zones regardless of zonegroup // fluffys add nojump, noduck
-				StartTouch(activator, action);
+		else if (action[0] == 6 || action[0] == 7 || action[0] == 8 || action[0] == 0 || action[0] == 9 || action[0] == 10 || action[0] == 11) // Allow MISC zones regardless of zonegroup // fluffys add nojump, noduck
+		{
+			g_iClientInZone[activator][3] = id;
+			StartTouch(activator, action);
+		}
 	}
 
 	return Plugin_Handled;
