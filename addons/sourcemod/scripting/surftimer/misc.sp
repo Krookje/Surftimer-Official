@@ -2175,7 +2175,7 @@ stock void PrintChatBonus (int client, int zGroup, int rank = 0)
 			db_insertAnnouncement(szName, g_szMapName, 1, g_szFinalTime[client], zGroup, 0);
 		}
 
-		SendNewRecordForward(client, 0, szRecordDiff, zGroup);
+		SendNewRecordForward(client, 0, szRecordDiff2, zGroup);
 	}
 
 	/* Start function call */
