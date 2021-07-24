@@ -1583,7 +1583,7 @@ public void db_viewPlayerPointsCallback(Handle owner, Handle hndl, const char[] 
 		int style;
 		while (SQL_FetchRow(hndl))
 		{
-			style = SQL_FetchInt(hndl, 10);
+			style = SQL_FetchInt(hndl, 9);
 			g_pr_points[client][style] = SQL_FetchInt(hndl, 2);
 			g_pr_finishedmaps[client][style] = SQL_FetchInt(hndl, 3);
 			g_pr_finishedmaps_perc[client][style] = (float(g_pr_finishedmaps[client][style]) / float(g_pr_MapCount[0])) * 100.0;
@@ -4375,7 +4375,7 @@ public void db_insertZone(int zoneid, int zonetype, int zonetypeid, float pointa
 	Format(zName, 128, g_szZoneGroupName[zonegroup]);
 
 	// char sql_insertZones[] = "INSERT INTO ck_zones (mapname, zoneid, zonetype, zonetypeid, pointa_x, pointa_y, pointa_z, pointb_x, pointb_y, pointb_z, vis, team, zonegroup, zonename, hookname, targetname, onejumplimit, prespeed) VALUES ('%s', '%i', '%i', '%i', '%f', '%f', '%f', '%f', '%f', '%f', '%i', '%i', '%i','%s','%s','%s',%i,%f)";
-	Format(szQuery, 1024, sql_insertZones, g_szMapName, zoneid, zonetype, zonetypeid, pointax, pointay, pointaz, pointbx, pointby, pointbz, vis, team, zonegroup, zName, "None", "player", 1, 250.0);
+	Format(szQuery, 1024, sql_insertZones, g_szMapName, zoneid, zonetype, zonetypeid, pointax, pointay, pointaz, pointbx, pointby, pointbz, vis, team, zonegroup, zName, "None", "player", 1, 350);
 	SQL_TQuery(g_hDb, SQL_insertZonesCallback, szQuery, 1, DBPrio_Low);
 }
 
@@ -9420,7 +9420,7 @@ public void db_viewCustomTitles(int client, char[] szSteamID)
 	Handle pack = CreateDataPack();
 	WritePackCell(pack, client);
 	WritePackString(pack, szSteamID);
-	Format(szQuery, sizeof(szQuery), "SELECT `title`, `namecolour`, `textcolour`, `inuse`, `vip`, `zoner`, `joinmsg` FROM `ck_vipadmins` WHERE `steamid` = '%s';", szSteamID);
+	Format(szQuery, sizeof(szQuery), sql_selectVipAdmins, szSteamID);
 	SQL_TQuery(g_hDb, SQL_viewCustomTitlesCallback, szQuery, pack, DBPrio_Low);
 }
 

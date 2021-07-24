@@ -3,12 +3,12 @@
 CREATE TABLE `ck_checkpointsnew` (
  `steamid` varchar(32),
  `mapname` varchar(32),
- `cp` int(11) NOT NULL,
+ `cp` SMALLINT(6) NOT NULL,
  `time` float NOT NULL,
- `velStartXY` int(11) NOT NULL DEFAULT '0',
- `velStartXYZ` int(11) NOT NULL DEFAULT '0',
- `velStartZ` int(11) NOT NULL DEFAULT '0',
- `zonegroup` int(12) NOT NULL,
+ `velStartXY` SMALLINT(6) NOT NULL DEFAULT '0',
+ `velStartXYZ` SMALLINT(6) NOT NULL DEFAULT '0',
+ `velStartZ` SMALLINT(6) NOT NULL DEFAULT '0',
+ `zonegroup` TINYINT(4) NOT NULL,
  PRIMARY KEY (`steamid`,`mapname`,`cp`,`zonegroup`)
 );
 
@@ -88,10 +88,11 @@ SELECT * FROM (
 ALTER TABLE ck_checkpoints RENAME TO ck_checkpointsold;
 ALTER TABLE ck_checkpointsnew RENAME TO ck_checkpoints;
 
-ALTER TABLE `ck_playertimes` ADD `velStartXY` INT NOT NULL AFTER `runtimepro`, ADD `velStartXYZ` INT NOT NULL AFTER `velStartXY`, ADD `velStartZ` INT NOT NULL AFTER `velStartXYZ`, ADD `velEndXY` INT NOT NULL AFTER `velStartZ`, ADD `velEndXYZ` INT NOT NULL AFTER `velEndXY`, ADD `velEndZ` INT NOT NULL AFTER `velEndXYZ`;
+ALTER TABLE `ck_playertimes` ADD `velStartXY` SMALLINT NOT NULL AFTER `runtimepro`, ADD `velStartXYZ` SMALLINT NOT NULL AFTER `velStartXY`, ADD `velStartZ` SMALLINT NOT NULL AFTER `velStartXYZ`, ADD `velEndXY` SMALLINT NOT NULL AFTER `velStartZ`, ADD `velEndXYZ` SMALLINT NOT NULL AFTER `velEndXY`, ADD `velEndZ` SMALLINT NOT NULL AFTER `velEndXYZ`;
 
-ALTER TABLE `ck_bonus` ADD `velStartXY` INT NOT NULL AFTER `runtime`, ADD `velStartXYZ` INT NOT NULL AFTER `velStartXY`, ADD `velStartZ` INT NOT NULL AFTER `velStartXYZ`, ADD `velEndXY` INT NOT NULL AFTER `velStartZ`, ADD `velEndXYZ` INT NOT NULL AFTER `velEndXY`, ADD `velEndZ` INT NOT NULL AFTER `velEndXYZ`;
+ALTER TABLE `ck_bonus` ADD `velStartXY` SMALLINT NOT NULL AFTER `runtime`, ADD `velStartXYZ` SMALLINT NOT NULL AFTER `velStartXY`, ADD `velStartZ` SMALLINT NOT NULL AFTER `velStartXYZ`, ADD `velEndXY` SMALLINT NOT NULL AFTER `velStartZ`, ADD `velEndXYZ` SMALLINT NOT NULL AFTER `velEndXY`, ADD `velEndZ` SMALLINT NOT NULL AFTER `velEndXYZ`;
 
-ALTER TABLE `ck_wrcps` ADD `velStartXY` INT NOT NULL AFTER `runtimepro`, ADD `velStartXYZ` INT NOT NULL AFTER `velStartXY`, ADD `velStartZ` INT NOT NULL AFTER `velStartXYZ`;
+ALTER TABLE `ck_wrcps` ADD `velStartXY` SMALLINT NOT NULL AFTER `runtimepro`, ADD `velStartXYZ` SMALLINT NOT NULL AFTER `velStartXY`, ADD `velStartZ` SMALLINT NOT NULL AFTER `velStartXYZ`;
 
 ALTER TABLE `ck_playeroptions2` ADD `smallhud` tinyint NOT NULL DEFAULT 1 AFTER `wrcpmessages`;
+ALTER TABLE `ck_playerrank` DROP `readchangelog`;
