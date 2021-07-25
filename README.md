@@ -20,10 +20,11 @@ Also don't think that anyone at this point wanna help this project, if you wanna
 * A MySQL Database (MySQL 5.7, MySQL 8+, MariaDB supported)
 
 **Extensions:**
-* [DHooks](https://forums.alliedmods.net/showthread.php?t=180114) - **Recommended:** [Detours Build](https://forums.alliedmods.net/showpost.php?p=2588686&postcount=589) for SourceMod 1.10 Stable
+* [DHooks](https://forums.alliedmods.net/showthread.php?t=180114) - **Recommended:** [Detours Build](https://github.com/peace-maker/DHooks2/releases) for SourceMod 1.10 Stable
 * [SMLib (Transitional Syntax Branch)](https://github.com/bcserv/smlib/tree/transitional_syntax)
 * [SourceMod Includes](https://www.sourcemod.net/downloads.php?branch=stable)
 * [AutoExecConfig](https://github.com/Impact123/AutoExecConfig)
+* **Optional:** [EndTouchFix](https://github.com/rumourA/End-Touch-Fix/blob/master/scripting/EndTouchFix.sp) - _You need to compile this for yourself, no official binary provided_
 
 ## I NEED HELP
 1st Step - check if you have something called brain
