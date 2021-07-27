@@ -24,7 +24,7 @@ Also don't think that anyone at this point wanna help this project, if you wanna
 * [SMLib (Transitional Syntax Branch)](https://github.com/bcserv/smlib/tree/transitional_syntax)
 * [SourceMod Includes](https://www.sourcemod.net/downloads.php?branch=stable)
 * [AutoExecConfig](https://github.com/Impact123/AutoExecConfig)
-* **Optional:** [EndTouchFix](https://github.com/rumourA/End-Touch-Fix/blob/master/scripting/EndTouchFix.sp) - _You need to compile this for yourself, no official binary provided_
+
 
 ## I NEED HELP
 1st Step - check if you have something called brain
