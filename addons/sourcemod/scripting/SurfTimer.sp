@@ -23,7 +23,7 @@
 #undef REQUIRE_PLUGIN
 #include <dhooks>
 #include <mapchooser>
-#include <discord>
+
 #include <surftimer>
 #include <autoexecconfig>
 
@@ -36,7 +36,7 @@
 #pragma semicolon 1
 
 // Plugin Info
-#define VERSION "3.2.-4"
+#define VERSION "3.2.0"
 
 // Database Definitions
 #define MYSQL 0
@@ -675,10 +675,11 @@ bool g_bFixingRamp[MAXPLAYERS + 1];
 ConVar g_hSlopeFixEnable;
 
 /*----------  Forwards  ----------*/
-Handle g_MapFinishForward;
-Handle g_MapCheckpointForward;
-Handle g_BonusFinishForward;
-Handle g_PracticeFinishForward;
+GlobalForward g_MapFinishForward;
+GlobalForward g_NewRecordForward;
+GlobalForward g_MapCheckpointForward;
+GlobalForward g_BonusFinishForward;
+GlobalForward g_PracticeFinishForward;
 
 /*----------  SQL Variables  ----------*/
 
@@ -1282,10 +1283,6 @@ int g_iAllowCheckpointRecreation; // Int for allowCheckpointRecreation convar
 char g_sServerName[256];
 ConVar g_hHostName = null;
 
-// discord bugtracker
-char g_sBugType[MAXPLAYERS + 1][32];
-char g_sBugMsg[MAXPLAYERS + 1][256];
-
 // Teleport Destinations
 Handle g_hDestinations;
 
@@ -1700,7 +1697,7 @@ char RadioCMDS[][] =  // Disable radio commands
 	"coverme", "takepoint", "holdpos", "regroup", "followme", "takingfire", "go", "fallback", "sticktog",
 	"getinpos", "stormfront", "report", "roger", "enemyspot", "needbackup", "sectorclear", "inposition",
 	"reportingin", "getout", "negative", "enemydown", "cheer", "thanks", "nice", "compliment", "go_a",
-	"go_b", "sorry", "needrop"
+	"go_b", "sorry", "needrop", "playerradio"
 };
 
 /*======  End of Declarations  ======*/
@@ -1824,8 +1821,11 @@ public void OnMapStart()
 	Format(g_szMapName, sizeof(g_szMapName), "%s", mapPieces[lastPiece - 1]);
 
 	// Debug Logging
-	if (!DirExists("addons/sourcemod/logs/surftimer"))
-		CreateDirectory("addons/sourcemod/logs/surftimer", 511);
+	char path[PLATFORM_MAX_PATH];
+	BuildPath(Path_SM, path, sizeof(path), "logs/surftimer");
+	
+	if (!DirExists(path))
+		CreateDirectory(path, 511);
 	BuildPath(Path_SM, g_szLogFile, sizeof(g_szLogFile), "logs/surftimer/%s.log", g_szMapName);
 
 	// Get map maxvelocity
@@ -2843,6 +2843,7 @@ public void OnPluginStart()
 
 	// Forwards
 	g_MapFinishForward = CreateGlobalForward("surftimer_OnMapFinished", ET_Event, Param_Cell, Param_Float, Param_String, Param_Cell, Param_Cell);
+	g_NewRecordForward = CreateGlobalForward("surftimer_OnNewRecord", ET_Event, Param_Cell, Param_Cell, Param_String, Param_String, Param_Cell);
 	g_MapCheckpointForward = CreateGlobalForward("surftimer_OnCheckpoint", ET_Event, Param_Cell, Param_Float, Param_String, Param_Float, Param_String, Param_Float, Param_String);
 	g_BonusFinishForward = CreateGlobalForward("surftimer_OnBonusFinished", ET_Event, Param_Cell, Param_Float, Param_String, Param_Cell, Param_Cell, Param_Cell);
 	g_PracticeFinishForward = CreateGlobalForward("surftimer_OnPracticeFinished", ET_Event, Param_Cell, Param_Float, Param_String);
