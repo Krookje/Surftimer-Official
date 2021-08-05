@@ -1,5 +1,14 @@
 # Changelog
 
+[2021-08-05 - Version 3.2.0]
+---
+- New database layout for checkpoints (max 128) and storing prespeed for players
+- MaxSpeedZone now limits speed acording to it's prespeed setting, it also works in XYZ
+- Added optimization sql file to reduce database size
+- When completing map or bonus in Practice mode will now compare time to SR and PB
+- Fixed stage command
+
+
 [2021-07-17 - Version 3.1.9]
 ---
 - Added new radio command to block list
