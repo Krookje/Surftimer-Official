@@ -7,7 +7,8 @@
 - Added optimization sql file to reduce database size
 - When completing map or bonus in Practice mode will now compare time to SR and PB
 - Fixed stage command
-
+- Added chat options menu in options menu (confusing?)
+- Added small hud option (might be broken sometimes, i think) in !options -> HUD Options -> Small HUD
 
 [2021-07-17 - Version 3.1.9]
 ---
