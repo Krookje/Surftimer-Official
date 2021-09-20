@@ -128,5 +128,3 @@ ALTER TABLE `ck_zones` CHANGE `vis` `vis` TINYINT(4) NOT NULL DEFAULT '0';
 ALTER TABLE `ck_zones` CHANGE `team` `team` TINYINT(4) NOT NULL DEFAULT '0';
 ALTER TABLE `ck_zones` CHANGE `zonegroup` `zonegroup` TINYINT(4) NOT NULL DEFAULT '0';
 ALTER TABLE `ck_zones` CHANGE `onejumplimit` `onejumplimit` TINYINT(4) NOT NULL DEFAULT '0';
-ALTER TABLE `ck_zones` CHANGE `prespeed` `prespeed` SMALLINT(6) NOT NULL DEFAULT '350';
-
