@@ -147,6 +147,9 @@ void CreateCommands()
 	RegConsoleCmd("sm_surftimer", Client_OptionMenu, "[surftimer] opens options menu");
 	RegConsoleCmd("sm_bhoptimer", Client_OptionMenu, "[surftimer] opens options menu");
 	RegConsoleCmd("sm_knife", Command_GiveKnife, "[surftimer] Give players a knife");
+	RegConsoleCmd("sm_hidespec", Command_HideSpec, "[surftimer] Hides spectater list");
+	RegConsoleCmd("sm_hidespecs", Command_HideSpec, "[surftimer] Hides spectater list");
+	RegConsoleCmd("sm_hidespectate", Command_HideSpec, "[surftimer] Hides spectater list");
 
 	// New Commands
 	RegConsoleCmd("sm_mrank", Command_SelectMapTime, "[surftimer] prints a players map record in chat.");
@@ -5347,4 +5350,26 @@ public int PlayRecordMenuHandler(Handle menu, MenuAction action, int param1, int
 		PlayRecordMenu(param1);
 	else if (action == MenuAction_End)
 		delete menu;
+}
+
+public Action Command_HideSpec(int client, int args)
+{
+	if (g_bSideHud[client])
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			if (g_iSideHudModule[client][i] == 5)
+			{
+				g_bSideHud[client] = false;
+				CPrintToChat(client, "%t", "HideSpecList", g_szChatPrefix);
+			}
+		}
+	}
+	else
+	{
+		g_bSideHud[client] = true;
+		CPrintToChat(client, "%t", "ShowSpecList", g_szChatPrefix);
+	}
+
+	return Plugin_Handled;
 }

@@ -1864,4 +1864,14 @@
 		"#format"	"{1:s}"
 		"en"	"{1} {darkred}You can't get a knife!"
 	}
+	"HideSpecList"
+	{
+		"#format"	"{1:s}"
+		"en"	"{1} {darkred}Spectate list now hidden!"
+	}
+	"ShowSpecList"
+	{
+		"#format"	"{1:s}"
+		"en"	"{1} {Lime}Spectate list now shown!"
+	}
 }
