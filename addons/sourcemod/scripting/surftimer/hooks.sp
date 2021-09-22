@@ -453,7 +453,9 @@ public Action Say_Hook(int client, const char[] command, int argc)
 			CGetRankColor(szChatRankColor, 1024);
 
 			if (GetConVarBool(g_hPointSystem) && GetConVarBool(g_hColoredNames) && !g_bDbCustomTitleInUse[client])
-				Format(szName, sizeof(szName), "{%s}%s", szChatRankColor, szName);
+			{
+				Format(szName, sizeof(szName), "%s%s", g_pr_namecolour[client], szName);
+			}
 
 			if (GetConVarBool(g_hCountry) && (GetConVarBool(g_hPointSystem)))
 			{
