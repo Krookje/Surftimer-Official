@@ -1314,11 +1314,18 @@ public Action Event_PlayerJump(Handle event, char[] name, bool dontBroadcast)
 			{
 				if (g_bFirstJump[client])
 				{
-					if (cTime > 0.8)
+					if (cTime > 0.8 && g_iCurrentStyle[client] != 4 && g_iCurrentStyle[client] != 5) // cTime Normal Threshold + Exclude LG/SM
 					{
 						g_bFirstJump[client] = true;
 						g_iLastJump[client] = GetGameTime();
 					}
+
+					else if (cTime > 1.6 && (g_iCurrentStyle[client] == 4 || g_iCurrentStyle[client] == 5)) // LG/SM jump time threshold
+					{
+						g_bFirstJump[client] = true;
+						g_iLastJump[client] = GetGameTime();
+					}
+					
 					else
 					{
 						g_iLastJump[client] = GetGameTime();
@@ -1333,11 +1340,19 @@ public Action Event_PlayerJump(Handle event, char[] name, bool dontBroadcast)
 			}
 			else
 			{
-				if (cTime > 1)
+				// 0.2s no-jump buffer (cTime + 0.2) to register as no longer in bhop.
+				if (cTime > 1 && g_iCurrentStyle[client] != 4 && g_iCurrentStyle[client] != 5) // Not LG/SM
 				{
 					g_bInBhop[client] = false;
 					g_iLastJump[client] = GetGameTime();
 				}
+
+				else if (cTime > 1.8 && (g_iCurrentStyle[client] == 4 || g_iCurrentStyle[client] == 5)) // LG/SM
+				{
+					g_bInBhop[client] = false;
+					g_iLastJump[client] = GetGameTime();
+				}
+
 				else
 				{
 					g_iLastJump[client] = GetGameTime();
@@ -1356,7 +1371,10 @@ public Action Event_PlayerJump(Handle event, char[] name, bool dontBroadcast)
 						g_bJumpedInZone[client] = true;
 						g_bResetOneJump[client] = true;
 						g_fJumpedInZoneTime[client] = GetGameTime();
-						CreateTimer(1.0, ResetOneJump, client, TIMER_FLAG_NO_MAPCHANGE);
+						if (g_iCurrentStyle[client] == 5 || g_iCurrentStyle[client] == 4)
+							CreateTimer(1.7, ResetOneJump, client, TIMER_FLAG_NO_MAPCHANGE);
+						else
+							CreateTimer(1.0, ResetOneJump, client, TIMER_FLAG_NO_MAPCHANGE);
 					}
 					else
 					{
@@ -1364,7 +1382,7 @@ public Action Event_PlayerJump(Handle event, char[] name, bool dontBroadcast)
 						float time = GetGameTime();
 						float time2 = time - g_fJumpedInZoneTime[client];
 						g_bJumpedInZone[client] = false;
-						if (time2 <= 0.9)
+						if ((time2 <= 0.9 && g_iCurrentStyle[client] != 4 && g_iCurrentStyle[client] != 5) || (time2 <= 1.6 && (g_iCurrentStyle[client] == 4 || g_iCurrentStyle[client] == 5)))
 						{
 							CPrintToChat(client, "%t", "Hooks15", g_szChatPrefix);
 							Handle pack;

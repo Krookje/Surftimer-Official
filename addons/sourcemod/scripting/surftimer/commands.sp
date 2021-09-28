@@ -927,7 +927,7 @@ public Action Command_goToPlayerCheckpoint(int client, int args)
 	return Plugin_Handled;
 }
 
-public Action Command_recreatePlayerCheckpoint(int client, char args)
+public Action Command_recreatePlayerCheckpoint(int client, int args)
 {
 	if (g_iAllowCheckpointRecreation == 0)
 	{
