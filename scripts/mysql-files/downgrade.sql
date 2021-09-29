@@ -16,11 +16,8 @@ ALTER TABLE `ck_bonus` DROP `velEndZ`;
 ALTER TABLE `ck_wrcps` DROP `velStartXY`;
 ALTER TABLE `ck_wrcps` DROP `velStartXYZ`;
 ALTER TABLE `ck_wrcps` DROP `velStartZ`;
--- ALTER TABLE `ck_wrcps` DROP `velEndXY`;
--- ALTER TABLE `ck_wrcps` DROP `velEndXYZ`;
--- ALTER TABLE `ck_wrcps` DROP `velEndZ`;
--- ALTER TABLE `ck_playeroptions2` DROP `velcmphud`;
--- ALTER TABLE `ck_playeroptions2` DROP `velcmpchat`;
+ALTER TABLE `ck_playeroptions2` DROP `smallhud`;
+ALTER TABLE `ck_playerrank` ADD `readchangelog` TINYINT NOT NULL DEFAULT 1 AFTER `connections`;
 
 CREATE TABLE IF NOT EXISTS ck_checkpointsnew (
     steamid VARCHAR(32),
