@@ -123,7 +123,7 @@ void CreateConVars()
 	AutoExecConfig_SetCreateFile(true);
 	AutoExecConfig_SetFile("surftimer");
 	
-	g_hChatPrefix = AutoExecConfig_CreateConVar("ck_chat_prefix", "{lime}SurfTimer {default}|", "Determines the prefix used for chat messages", FCVAR_NOTIFY);
+	g_hChatPrefix = AutoExecConfig_CreateConVar("ck_chat_prefix", "{purple}CS.Surf {default}|", "Determines the prefix used for chat messages", FCVAR_NOTIFY);
 	g_hConnectMsg = AutoExecConfig_CreateConVar("ck_connect_msg", "1", "on/off - Enables a player connect message with country tag", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	g_hAllowRoundEndCvar = AutoExecConfig_CreateConVar("ck_round_end", "0", "on/off - Allows to end the current round", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	g_hDisconnectMsg = AutoExecConfig_CreateConVar("ck_disconnect_msg", "1", "on/off - Enables a player disconnect message in chat", FCVAR_NOTIFY, true, 0.0, true, 1.0);
